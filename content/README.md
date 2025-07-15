@@ -41,10 +41,10 @@ See the [contributing docs](https://docs.github.com/en/contributing) for general
   - [Index pages](#index-pages)
   - [Home page](#homepage)
   - [Creating new product guides pages](#creating-new-product-guides-pages)
-
-## Frontmatter
-
-[YAML Frontmatter](https://jekyllrb.com/docs/front-matter/) is an authoring
+  
+  ## Frontmatter
+  
+  [YAML Frontmatter](https://jekyllrb.com/docs/front-matter/) is an authoringfront-matter/) is an authoringfront-matter/) is an authoring
 convention popularized by Jekyll that provides a way to add metadata to pages.
 It is a block of key-value content that lives at the top of every Markdown file.
 
