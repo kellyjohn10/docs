@@ -8,7 +8,10 @@ import type {
   CategorizedEvents,
   VersionedAuditLogData,
   RawAuditLogEventT,
+  CategoryNotes,
+  AuditLogConfig,
 } from '../types'
+import config from './config.json'
 
 export const AUDIT_LOG_DATA_DIR = 'src/audit-logs/data'
 
@@ -19,6 +22,12 @@ const categorizedAuditLogEventsCache = new Map<string, Map<string, CategorizedEv
 type PipelineConfig = {
   sha: string
   appendedDescriptions: Record<string, string>
+}
+
+// get category notes from config
+export function getCategoryNotes(): CategoryNotes {
+  const auditLogConfig = config as AuditLogConfig
+  return auditLogConfig.categoryNotes || {}
 }
 
 type TitleResolutionContext = {
@@ -174,6 +183,7 @@ export async function filterByAllowlistValues({
         action: event.action,
         description: processAndGetEventDescription(event, eventAllowlists, pipelineConfig),
         docs_reference_links: event.docs_reference_links,
+        fields: event.fields,
       }
 
       // Resolve reference link titles if context is provided
@@ -259,6 +269,7 @@ export async function filterAndUpdateGhesDataByAllowlistValues({
           action: event.action,
           description: processAndGetEventDescription(event, ghesVersionAllowlists, pipelineConfig),
           docs_reference_links: event.docs_reference_links,
+          fields: event.ghes[ghesVersion].fields || event.fields,
         }
 
         // Resolve reference link titles if context is provided
